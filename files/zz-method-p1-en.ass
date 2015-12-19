@@ -1,0 +1,200 @@
+﻿[Script Info]
+Title: Default Aegisub file
+ScriptType: v4.00+
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+Collisions: Normal
+PlayResX: 640
+PlayResY: 480
+Audio URI: d/bd/我的资源/Asmallkitten/ZZ Method Tutorial/ZZ Method Tutorial Part 1- Introduction.mp4
+Scroll Position: 173
+Active Line: 176
+Video Zoom Percent: 1.5
+Video File: d/bd/我的资源/Asmallkitten/ZZ Method Tutorial/ZZ Method Tutorial Part 1- Introduction.mp4
+Video Aspect Ratio: c1.33333
+Video Position: 24376
+YCbCr Matrix: TV.601
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default,Arial,20,&H00FFFFFF,&H000000FF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,2,2,2,10,10,10,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:03.08,Default,,0,0,0,,hey everyone, welcome to my zz tutorial
+Dialogue: 0,0:00:03.08,0:00:04.95,Default,,0,0,0,,this video is part one
+Dialogue: 0,0:00:04.95,0:00:07.92,Default,,0,0,0,,and in this part I'm going to be showing you guys
+Dialogue: 0,0:00:07.92,0:00:09.72,Default,,0,0,0,,a brief overview of the method
+Dialogue: 0,0:00:09.72,0:00:12.06,Default,,0,0,0,,as well as some background information
+Dialogue: 0,0:00:12.06,0:00:19.60,Default,,0,0,0,,so there will be 4 things in this video, and this video will be more of a sit back relax and listen type of video
+Dialogue: 0,0:00:19.87,0:00:25.00,Default,,0,0,0,,there wont be too much movement, nor there will be too much strictly  educational content
+Dialogue: 0,0:00:25.00,0:00:28.74,Default,,0,0,0,,it's mostly really interesting information and some stories
+Dialogue: 0,0:00:29.57,0:00:34.48,Default,,0,0,0,,the first thing what  I'll do is I'll get you guys a break down of the method
+Dialogue: 0,0:00:34.48,0:00:37.52,Default,,0,0,0,,so I'll explain verbally what the method is all about
+Dialogue: 0,0:00:37.52,0:00:39.25,Default,,0,0,0,,what happens in the method
+Dialogue: 0,0:00:39.25,0:00:42.92,Default,,0,0,0,,the second thing I'll do is give you a quick demonstration solve
+Dialogue: 0,0:00:42.92,0:00:44.92,Default,,0,0,0,,so you can actually see what happens
+Dialogue: 0,0:00:44.92,0:00:45.72,Default,,0,0,0,,in the zz solve
+Dialogue: 0,0:00:47.69,0:00:49.66,Default,,0,0,0,,I will give you the mothod's history
+Dialogue: 0,0:00:49.66,0:00:52.50,Default,,0,0,0,,as well as interesting background information
+Dialogue: 0,0:00:52.50,0:00:56.47,Default,,0,0,0,,the last thing is I'm going to talk about my experience using it
+Dialogue: 0,0:00:56.47,0:00:59.47,Default,,0,0,0,,so let's get into the breakdown of the method
+Dialogue: 0,0:01:02.47,0:01:05.81,Default,,0,0,0,,so let's talk about a little bit about  the method's breakdown
+Dialogue: 0,0:01:05.81,0:01:11.25,Default,,0,0,0,,so when I say breakdown I mean what steps are in the method and in what order to become
+Dialogue: 0,0:01:11.25,0:01:16.86,Default,,0,0,0,,so the zz mothed has three steps the first step is called the OE line
+Dialogue: 0,0:01:16.86,0:01:22.09,Default,,0,0,0,,EO stands for edge orientation, so you can expect there will be  some sort of magic with edges
+Dialogue: 0,0:01:22.09,0:01:24.80,Default,,0,0,0,,before you start actually solving things
+Dialogue: 0,0:01:24.80,0:01:28.67,Default,,0,0,0,,and the line obviously refers to a line-like structure on the cube
+Dialogue: 0,0:01:28.67,0:01:31.97,Default,,0,0,0,,in this case , it's a line on the D face
+Dialogue: 0,0:01:31.97,0:01:34.57,Default,,0,0,0,,so whatever is down for you
+Dialogue: 0,0:01:34.57,0:01:42.91,Default,,0,0,0,,and it's built between the front center and down center and the back center
+Dialogue: 0,0:01:42.91,0:01:44.25,Default,,0,0,0,,so it's this line right here
+Dialogue: 0,0:01:44.25,0:01:48.95,Default,,0,0,0,,in the demonstration solve, I'll show you guys excactly what  an EO line looks like
+Dialogue: 0,0:01:48.95,0:01:53.36,Default,,0,0,0,,but for now, it's ..edge's all oriented, and then there's a line that solved over here
+Dialogue: 0,0:01:53.36,0:01:57.53,Default,,0,0,0,,you can think of it as  a  half cross if your background is CFOP
+Dialogue: 0,0:01:57.53,0:02:00.03,Default,,0,0,0,,after the EO line is finished
+Dialogue: 0,0:02:00.03,0:02:02.57,Default,,0,0,0,,the solver ago ahead and does F2L
+Dialogue: 0,0:02:02.57,0:02:07.27,Default,,0,0,0,,and the F2L feel very very different, because the edges are oriented in the first place
+Dialogue: 0,0:02:07.27,0:02:11.54,Default,,0,0,0,,in our case the F2L is render three (joint?)
+Dialogue: 0,0:02:11.54,0:02:16.25,Default,,0,0,0,,and what three (joints?) means is solvable by using only three different face turns
+Dialogue: 0,0:02:16.25,0:02:19.68,Default,,0,0,0,,and in our case the face turns are RUL
+Dialogue: 0,0:02:19.68,0:02:24.39,Default,,0,0,0,,so you can use any form of R moves, like R' R2 or even R itself
+Dialogue: 0,0:02:24.39,0:02:34.43,Default,,0,0,0,,and any form of U move, and any form of L move, and those three moves or type of moves or groups of moves are the only moves needed to solve the F2L
+Dialogue: 0,0:02:34.43,0:02:39.60,Default,,0,0,0,,so because you only have three different type of moves, you dont have to retate the cube
+Dialogue: 0,0:02:39.60,0:02:45.88,Default,,0,0,0,,becaue you can reache RUL all from this position, you dont have to do any F or B turns or D turns
+Dialogue: 0,0:02:45.88,0:02:49.92,Default,,0,0,0,,so it's very physically efficient and very comfortable
+Dialogue: 0,0:02:49.92,0:02:53.39,Default,,0,0,0,,so that's another very interesting part of the zz method
+Dialogue: 0,0:02:53.39,0:02:57.52,Default,,0,0,0,,after you solve the F2L, you'll get a cross on the top here
+Dialogue: 0,0:02:57.52,0:03:06.57,Default,,0,0,0,,this will resemble ... what happens after  you say  you do  a two look OLL and you solve the cross it will automaticall solve for you
+Dialogue: 0,0:03:06.57,0:03:09.77,Default,,0,0,0,,if you dont know OLL .. you will soon
+Dialogue: 0,0:03:09.77,0:03:13.41,Default,,0,0,0,,if you use the zz method because you'll get an automaticall top cross
+Dialogue: 0,0:03:13.41,0:03:18.31,Default,,0,0,0,,and those seven (COLLs?) will act as one look oll which is very cool
+Dialogue: 0,0:03:18.31,0:03:20.28,Default,,0,0,0,,if you're like (light weight ous?)
+Dialogue: 0,0:03:20.28,0:03:22.61,Default,,0,0,0,,it really restrict your last layer
+Dialogue: 0,0:03:22.61,0:03:24.82,Default,,0,0,0,,speaking of restricting your last layer
+Dialogue: 0,0:03:24.82,0:03:33.59,Default,,0,0,0,,the top cross also serves as a said way into  more case restriction, if you want to do sort of one look last layer
+Dialogue: 0,0:03:33.59,0:03:47.54,Default,,0,0,0,,some people.. because you have already form the top cross, go even further in restricting  the cases of last layer by say.. permuting edges or orienting corners
+Dialogue: 0,0:03:47.54,0:03:50.04,Default,,0,0,0,,makes one-look last layer more practical
+Dialogue: 0,0:03:50.04,0:03:57.32,Default,,0,0,0,,so that's pretty much breakdown of  the zz method. the steps are again:  EO line;  F2L and last layer 
+Dialogue: 0,0:03:58.16,0:04:06.99,Default,,0,0,0,,the last layer has variety of options, you can even do some very interesting last slot tricks like CLS or (winter?) variation
+Dialogue: 0,0:04:06.99,0:04:15.43,Default,,0,0,0,,those are more common and easy because edges are oriented and you dont have to do say (els?) in order to orient the edges before you do cls
+Dialogue: 0,0:04:15.43,0:04:21.34,Default,,0,0,0,,so in case you're a bit comfused by the terminology, I'll have links in the description
+Dialogue: 0,0:04:21.34,0:04:24.71,Default,,0,0,0,,so you guys can see all the algorithm sets I'm talking about
+Dialogue: 0,0:04:24.71,0:04:31.22,Default,,0,0,0,,so like winter variation ,cls I'll link you guys to all of those so you guys can see what all of those's all about
+Dialogue: 0,0:04:31.22,0:04:33.95,Default,,0,0,0,,let's get down to the demonstrations
+Dialogue: 0,0:04:37.59,0:04:42.16,Default,,0,0,0,,all right. so let's take a look at  this scramble it's actually sitting in front of me for quite a while now
+Dialogue: 0,0:04:42.16,0:04:47.20,Default,,0,0,0,,I'm going to solve this, and show you guys what a zz solve will look like
+Dialogue: 0,0:04:47.20,0:04:54.57,Default,,0,0,0,,I'm going to just solve the EO line ,point it out to you just  to show you what it's like, solve the F2L
+Dialogue: 0,0:04:54.57,0:05:01.21,Default,,0,0,0,,point it out to you to show you what its like, and then solve the last layer and then talk a little bit and then will be fine
+Dialogue: 0,0:05:01.21,0:05:04.58,Default,,0,0,0,,in terms of the demonstration solve
+Dialogue: 0,0:05:04.58,0:05:06.18,Default,,0,0,0,,here is what I'll do for the EO line
+Dialogue: 0,0:05:08.29,0:05:09.75,Default,,0,0,0,,like that
+Dialogue: 0,0:05:09.75,0:05:11.56,Default,,0,0,0,,and the line is solved
+Dialogue: 0,0:05:11.56,0:05:13.56,Default,,0,0,0,,can see the line?
+Dialogue: 0,0:05:13.56,0:05:18.10,Default,,0,0,0,,and the edgs are oriented. dont worry if you cant tell they're oriented
+Dialogue: 0,0:05:18.10,0:05:26.91,Default,,0,0,0,,there will be plenty of video content for you guys to watch and I'll be teaching edge orientation in  a very very  comprehensive manner.
+Dialogue: 0,0:05:26.91,0:05:33.98,Default,,0,0,0,,as of now , I finished this EO line. so now what I'm  here on is F2L
+Dialogue: 0,0:05:33.98,0:05:38.35,Default,,0,0,0,,so I'm gonna solve the F2L using  three (joints) so no cube rotation required
+Dialogue: 0,0:05:38.35,0:05:41.49,Default,,0,0,0,,it's only RUL so keep an eye on that
+Dialogue: 0,0:05:46.26,0:05:50.80,Default,,0,0,0,,and it's not solved HAHA
+Dialogue: 0,0:05:50.80,0:05:54.47,Default,,0,0,0,,this is what we calle a CLS
+Dialogue: 0,0:05:54.47,0:05:57.04,Default,,0,0,0,,and I was mention it earlier but
+Dialogue: 0,0:05:57.04,0:06:00.11,Default,,0,0,0,,there is an algorithm set  that  flip all this corners
+Dialogue: 0,0:06:00.11,0:06:03.81,Default,,0,0,0,,If you have only one corner misplaced
+Dialogue: 0,0:06:03.81,0:06:05.81,Default,,0,0,0,,on the F2L and the rest is done
+Dialogue: 0,0:06:05.81,0:06:10.01,Default,,0,0,0,,so what I'm gonna do is flip this corner and  flip the other corners
+Dialogue: 0,0:06:10.01,0:06:12.05,Default,,0,0,0,,the algorithm goes like this
+Dialogue: 0,0:06:12.05,0:06:14.55,Default,,0,0,0,,it give us OLL
+Dialogue: 0,0:06:14.55,0:06:16.09,Default,,0,0,0,,bucause all the corners are fliped
+Dialogue: 0,0:06:16.09,0:06:18.29,Default,,0,0,0,,and all the edges are fliped in the first place
+Dialogue: 0,0:06:18.29,0:06:19.69,Default,,0,0,0,,so It allow me to do that
+Dialogue: 0,0:06:19.69,0:06:21.69,Default,,0,0,0,,and this is a (G permute?)
+Dialogue: 0,0:06:23.10,0:06:24.80,Default,,0,0,0,,like that
+Dialogue: 0,0:06:24.80,0:06:25.36,Default,,0,0,0,,and the cube is solved.
+Dialogue: 0,0:06:25.36,0:06:29.97,Default,,0,0,0,,so that was a pretty normal zz solve minus CLS
+Dialogue: 0,0:06:29.97,0:06:33.84,Default,,0,0,0,,CLS doesnt technically belong in the zz method but It's certainly very handy
+Dialogue: 0,0:06:33.84,0:06:38.24,Default,,0,0,0,,because It allows you to skip steps and maybe even combines two steps together
+Dialogue: 0,0:06:38.24,0:06:43.11,Default,,0,0,0,,so I highly recommand learning it , I'll cover  some  general CLS stuff
+Dialogue: 0,0:06:43.11,0:06:45.65,Default,,0,0,0,,in future video in the series
+Dialogue: 0,0:06:45.65,0:06:51.09,Default,,0,0,0,,but for now that was the demonstration of I hope you guys enjoy what zz look like
+Dialogue: 0,0:06:51.09,0:06:55.79,Default,,0,0,0,,if you are interested we can continue to the method history
+Dialogue: 0,0:06:59.13,0:07:02.63,Default,,0,0,0,,all right, so let's talk about the history of the method
+Dialogue: 0,0:07:02.63,0:07:08.51,Default,,0,0,0,,so this method was invented in 2006 by a man named Zbigniew Zborowski 
+Dialogue: 0,0:07:08.51,0:07:12.94,Default,,0,0,0,,I aksed one of polish friends had it  pronouced and he say it was vaguely that
+Dialogue: 0,0:07:12.94,0:07:16.21,Default,,0,0,0,,so in the future I'm just gonna  call him zz or Mr.Z
+Dialogue: 0,0:07:16.21,0:07:21.15,Default,,0,0,0,,so as I said earlier this method  was invented in 2006
+Dialogue: 0,0:07:21.15,0:07:26.59,Default,,0,0,0,,and when it was being proposed and developed, It had ergonomics in mind
+Dialogue: 0,0:07:26.59,0:07:36.57,Default,,0,0,0,,and when I said ergonomics in plaint english It means the study / the science of making things comfortable and efficient
+Dialogue: 0,0:07:36.57,0:07:42.94,Default,,0,0,0,,so if you were to play ergonomics type of thinking to more practical thing such as cup
+Dialogue: 0,0:07:42.94,0:07:48.35,Default,,0,0,0,,a more ergonomic cup It would be easier to hold while you're walking
+Dialogue: 0,0:07:48.35,0:07:53.72,Default,,0,0,0,,like the shape of the cup would be easier to hold so you dont spill while you're walking somewhere
+Dialogue: 0,0:07:53.72,0:08:00.86,Default,,0,0,0,,or perhaps the material of the cup would be not so susceptible to temperature change
+Dialogue: 0,0:08:00.86,0:08:05.56,Default,,0,0,0,,let's say you're driking something really really hot, you wouldnt burn your hand while drinking it
+Dialogue: 0,0:08:05.56,0:08:14.14,Default,,0,0,0,,so that's ergonomics in the conventional sense, in the 3x3 zz solve ergonomics as limiting cube rotations
+Dialogue: 0,0:08:14.14,0:08:17.28,Default,,0,0,0,,and restricting your F2L to RUL moves
+Dialogue: 0,0:08:17.28,0:08:27.05,Default,,0,0,0,,so that was his point of view of what ergonomics was on his cube and I think he persuit it very very well thought out in high level degree
+Dialogue: 0,0:08:27.05,0:08:30.99,Default,,0,0,0,,in developing the zz method so that's what ergonomics refers to
+Dialogue: 0,0:08:32.36,0:08:39.10,Default,,0,0,0,,right now the zz method is (lump) together with three other methods in a group called "the big four"
+Dialogue: 0,0:08:39.10,0:08:41.50,Default,,0,0,0,,and those are just totally  informal
+Dialogue: 0,0:08:41.50,0:08:45.20,Default,,0,0,0,,but 'the big four' are the methods most people know about
+Dialogue: 0,0:08:45.20,0:08:50.34,Default,,0,0,0,,they don't know how to necessarily do every single thing in the method they know they exist
+Dialogue: 0,0:08:50.34,0:08:53.18,Default,,0,0,0,,they know other people out there are practicing them
+Dialogue: 0,0:08:53.18,0:08:56.51,Default,,0,0,0,,they are competitive with those methods
+Dialogue: 0,0:08:56.51,0:09:01.45,Default,,0,0,0,,the big four methods include CFOP (perture?) (rul?) and zz
+Dialogue: 0,0:09:01.45,0:09:11.46,Default,,0,0,0,,however dispite being a 'big four method', I think zz is still relatively unexplored compared to other method such as CFOP which has been studied over and over again
+Dialogue: 0,0:09:11.46,0:09:20.31,Default,,0,0,0,,and a lot of people use it. so I think zz should definitely get more of chance to be seen in the world
+Dialogue: 0,0:09:20.31,0:09:23.58,Default,,0,0,0,,that's part of reason why I was making this tutorial
+Dialogue: 0,0:09:23.58,0:09:30.68,Default,,0,0,0,,to show everyone what  the method is all about so people who are interested in switching have an opportunity to expore a new method
+Dialogue: 0,0:09:30.68,0:09:35.22,Default,,0,0,0,,so that pretty much does it for the history of the method
+Dialogue: 0,0:09:35.22,0:09:39.56,Default,,0,0,0,,after that one I'm gonna talk about my experience using it
+Dialogue: 0,0:09:42.83,0:09:47.00,Default,,0,0,0,,all right. so for those of you  who dont know me very well , My name is Phil Yu
+Dialogue: 0,0:09:47.00,0:09:50.57,Default,,0,0,0,,I've been solving with the zz method since 2009
+Dialogue: 0,0:09:50.57,0:09:54.17,Default,,0,0,0,,I first came across the method in the speed sovling forum
+Dialogue: 0,0:09:54.17,0:10:01.65,Default,,0,0,0,,I just read the thread and on the thread there was some guy post a  text documentation of the method
+Dialogue: 0,0:10:01.65,0:10:07.25,Default,,0,0,0,,so the first description of the method I got was in text so I  read the whole thing  and I was really interested
+Dialogue: 0,0:10:07.25,0:10:11.82,Default,,0,0,0,,because It was a whole new way to kind of look at efficiency when solving
+Dialogue: 0,0:10:11.82,0:10:12.99,Default,,0,0,0,,so I was really interested
+Dialogue: 0,0:10:12.99,0:10:16.49,Default,,0,0,0,,I felt that It had great one-handed potential
+Dialogue: 0,0:10:16.49,0:10:20.90,Default,,0,0,0,,and It really went along with the things I prefer for one-handed
+Dialogue: 0,0:10:20.90,0:10:23.70,Default,,0,0,0,,so the efficiency that was inbeded in the method
+Dialogue: 0,0:10:23.70,0:10:28.64,Default,,0,0,0,,was also the efficiency I prefered in  one-hand solving those so I thought those two will wok well together
+Dialogue: 0,0:10:28.64,0:10:32.68,Default,,0,0,0,,so I tried that I still solve zz today
+Dialogue: 0,0:10:32.68,0:10:34.11,Default,,0,0,0,,and I'm very happy I do
+Dialogue: 0,0:10:34.11,0:10:39.02,Default,,0,0,0,,because A: It sets me apart B it's like an adventure
+Dialogue: 0,0:10:39.02,0:10:42.55,Default,,0,0,0,,because I don't know what I'm going to do next with the method
+Dialogue: 0,0:10:42.55,0:10:44.55,Default,,0,0,0,,there's always new things to learn
+Dialogue: 0,0:10:44.55,0:10:51.13,Default,,0,0,0,,It's really interesting to be one of the first people to use the method competitively
+Dialogue: 0,0:10:51.13,0:11:03.31,Default,,0,0,0,,as of 20:12 right now it's 20:12 in  recording this video I average around 11 seconds two-handed 13 seconds one-handed
+Dialogue: 0,0:11:03.31,0:11:07.95,Default,,0,0,0,,and even though 13s one-haned seems a bit fast 
+Dialogue: 0,0:11:07.95,0:11:11.05,Default,,0,0,0,,I think there's definitely room for growth
+Dialogue: 0,0:11:11.05,0:11:15.19,Default,,0,0,0,,I definitely feel like I could do a lot of things better than I currently do
+Dialogue: 0,0:11:15.19,0:11:22.46,Default,,0,0,0,,I'm really excited to see where the method will go in the future which is part of the reason why I'm making this video
+Dialogue: 0,0:11:22.46,0:11:25.40,Default,,0,0,0,,I'm making it so that more people can see how the method works
+Dialogue: 0,0:11:25.40,0:11:29.80,Default,,0,0,0,,perhaps more people can make the mothod their own method
+Dialogue: 0,0:11:29.80,0:11:34.14,Default,,0,0,0,,you know I feel like this process has really great mutual benefit effect
+Dialogue: 0,0:11:34.14,0:11:36.47,Default,,0,0,0,,which I'm going to explain right now
+Dialogue: 0,0:11:36.47,0:11:40.24,Default,,0,0,0,,so the effect I was describing earlier
+Dialogue: 0,0:11:40.24,0:11:46.68,Default,,0,0,0,,kind of goes like this so you get a new method and you learn how it basically work
+Dialogue: 0,0:11:46.68,0:11:50.82,Default,,0,0,0,,you kind of work it in with your own style and your preferences
+Dialogue: 0,0:11:50.82,0:11:55.26,Default,,0,0,0,,and because the mothod has been tested already I'm sure if you go about it  the right way
+Dialogue: 0,0:11:55.26,0:12:02.57,Default,,0,0,0,,you'll get some great times and you'll experience a whole new way of solving a cube which to me is very stimulating
+Dialogue: 0,0:12:02.57,0:12:05.54,Default,,0,0,0,,so you'll get all those results
+Dialogue: 0,0:12:05.54,0:12:11.71,Default,,0,0,0,,and then what you can do is you take all the things you find and give back to the method
+Dialogue: 0,0:12:11.71,0:12:15.18,Default,,0,0,0,,and you know all this interesting techniques you find
+Dialogue: 0,0:12:15.18,0:12:22.15,Default,,0,0,0,, maybe you find some algorithms or you know you find a  way to build  blocks in a really cool way you just give it back to the method
+Dialogue: 0,0:12:22.15,0:12:24.26,Default,,0,0,0,,and the method will keep growing and growing
+Dialogue: 0,0:12:24.26,0:12:29.09,Default,,0,0,0,,and  you'll grow as solver as you use the method and the method will grow with you
+Dialogue: 0,0:12:29.09,0:12:32.60,Default,,0,0,0,,which is the really really cool thing about using a new method
+Dialogue: 0,0:12:32.60,0:12:40.64,Default,,0,0,0,,personally , I don't find it the same  if the method's just  all developed just like laid out in front of you
+Dialogue: 0,0:12:40.64,0:12:42.97,Default,,0,0,0,,I personally like to interact with my method
+Dialogue: 0,0:12:42.97,0:12:46.28,Default,,0,0,0,,so I think zz is really really great for that
+Dialogue: 0,0:12:46.28,0:12:51.88,Default,,0,0,0,,so I'm hoping more people can see this tutorial and get a better idea of what zz is all about
+Dialogue: 0,0:12:51.88,0:12:56.69,Default,,0,0,0,,I'm currently one of the only competitive zz solvers out there
+Dialogue: 0,0:12:56.69,0:12:59.42,Default,,0,0,0,,and I definitely wish there were more
+Dialogue: 0,0:12:59.42,0:13:02.63,Default,,0,0,0,,so if you're interested I hope to see you in the next video
+Dialogue: 0,0:13:02.63,0:13:11.90,Default,,0,0,0,,the next video will be a video of  edge orientation detection and that will become the first educational portion of the series
+Dialogue: 0,0:13:11.90,0:13:16.44,Default,,0,0,0,,I'll teach you how to detect all the wrong edges you can eventually orient them
+Dialogue: 0,0:13:16.44,0:13:19.08,Default,,0,0,0,,so that's what you'll look out afterwards
+Dialogue: 0,0:13:19.08,0:13:25.95,Default,,0,0,0,,if you're still curious about the method and  want to see more I have plenty of solving videos that I'll post in the description
+Dialogue: 0,0:13:25.95,0:13:33.32,Default,,0,0,0,,as well as some walk through solves if you're interested  in the thought process involved in the zz method
+Dialogue: 0,0:13:33.32,0:13:38.23,Default,,0,0,0,,so thanks again for watching the video I hope to see you in the next part
