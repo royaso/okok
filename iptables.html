@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" type="text/css" href="http://static.thegeekstuff.com/wp-content/thesis/skins/classic-r/css.css.gzip" media="screen, projection" />
+<title>Linux IPTables: Incoming and Outgoing Rule Examples (SSH and HTTP)</title>
+<meta name="description" content="In our previous IPTables firewall series article, we reviewed how to add firewall rule using &#8220;iptables -A&#8221;. We also explained how to allow incoming SSH con" />
+<meta name="robots" content="noodp, noydir" />
+<link rel="canonical" href="http://www.thegeekstuff.com/2011/03/iptables-inbound-and-outbound-rules/" />
+<link rel="alternate" type="application/rss+xml" title="The Geek Stuff feed" href="http://www.thegeekstuff.com/feed/" />
+<link rel="pingback" href="http://www.thegeekstuff.com/xmlrpc.php" />
+
+<!-- All in One SEO Pack 2.2.6.2 by Michael Torbert of Semper Fi Web Design[295,368] -->
+<meta name="description"  content="In our previous IPTables firewall series article, we reviewed how to add firewall rule using &quot;iptables -A&quot;. We also explained how to allow incoming SSH" />
+
+<link rel="canonical" href="http://www.thegeekstuff.com/2011/03/iptables-inbound-and-outbound-rules/" />
+<!-- /all in one seo pack -->
+<link rel="alternate" type="application/rss+xml" title="The Geek Stuff &raquo; Linux IPTables: Incoming and Outgoing Rule Examples (SSH and HTTP) Comments Feed" href="http://www.thegeekstuff.com/2011/03/iptables-inbound-and-outbound-rules/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/www.thegeekstuff.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.4.2"}};
+			!function(a,b,c){function d(a){var c,d=b.createElement("canvas"),e=d.getContext&&d.getContext("2d"),f=String.fromCharCode;return e&&e.fillText?(e.textBaseline="top",e.font="600 32px Arial","flag"===a?(e.fillText(f(55356,56806,55356,56826),0,0),d.toDataURL().length>3e3):"diversity"===a?(e.fillText(f(55356,57221),0,0),c=e.getImageData(16,16,1,1).data.toString(),e.fillText(f(55356,57221,55356,57343),0,0),c!==e.getImageData(16,16,1,1).data.toString()):("simple"===a?e.fillText(f(55357,56835),0,0):e.fillText(f(55356,57135),0,0),0!==e.getImageData(16,16,1,1).data[0])):!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g;c.supports={simple:d("simple"),flag:d("flag"),unicode8:d("unicode8"),diversity:d("diversity")},c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.simple&&c.supports.flag&&c.supports.unicode8&&c.supports.diversity||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='https://api.w.org/' href='http://www.thegeekstuff.com/wp-json/' />
+<link rel="alternate" type="application/json+oembed" href="http://www.thegeekstuff.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fwww.thegeekstuff.com%2F2011%2F03%2Fiptables-inbound-and-outbound-rules%2F" />
+<link rel="alternate" type="text/xml+oembed" href="http://www.thegeekstuff.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fwww.thegeekstuff.com%2F2011%2F03%2Fiptables-inbound-and-outbound-rules%2F&#038;format=xml" />
+<link rel="shortcut icon" href="http://static.thegeekstuff.com/wp-content/uploads/2015/05/favicon.ico.gzip" />
+</head>
+<body class="template-single">
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-5302569-1']);
+_gaq.push(['_trackPageview']);
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+<div class="container">
+	<div id="header" class="header">
+<p id="logo"><a href="http://www.thegeekstuff.com"><img src="http://static.thegeekstuff.com/wp-content/themes/thesis_18/custom/images/thegeekstuff.gif" alt="The Geek Stuff" /></a></p><div id="header_ad"><div id="header_ad1">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- TGS Logo Header -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-8090601437064582"
+     data-ad-slot="4708993701"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div></div>
+	</div>
+	<span class="menu_control">≡ Menu</span>
+<ul id="menu-tgs-menu" class="menu"><li id="menu-item-15798" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-15798"><a href="http://www.thegeekstuff.com/">Home</a></li>
+<li id="menu-item-15797" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15797"><a href="http://www.thegeekstuff.com/linux-101-hacks-ebook/">Free eBook</a></li>
+<li id="menu-item-15805" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15805"><a href="http://www.thegeekstuff.com/best-of-the-blog/">Start Here</a></li>
+<li id="menu-item-15800" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15800"><a href="http://www.thegeekstuff.com/contact/">Contact</a></li>
+<li id="menu-item-15802" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15802"><a href="http://www.thegeekstuff.com/about/">About</a></li>
+</ul>
+	<div class="columns">
+		<div class="content">
+			<div id="post-7344" class="post_box grt top" itemscope itemtype="http://schema.org/Article">
+				<div class="headline_area">
+					<h1 class="headline" itemprop="name">Linux IPTables: Incoming and Outgoing Rule Examples (SSH and HTTP)</h1>
+					<div class="byline small">
+						<span class="post_author_intro">by</span> <span class="post_author" itemprop="author">Ramesh Natarajan</span>
+						<meta itemprop="datePublished" content="2011-03-15" />
+						<meta itemprop="dateModified" content="2013-04-09" />
+						<span class="post_date_intro">on</span> <span class="post_date" title="2011-03-15">March 15, 2011</span>
+					</div>
+				</div>
+				<div class="post_content" itemprop="articleBody">
+<div style="margin:7px 0px 6px 0px; padding:5px;">
+
+<div style="float:left; width=95px">
+<g:plusone size="medium"></g:plusone>
+</div>
+
+<div style="float:left; padding:2px; width:90px"><iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.thegeekstuff.com%2F2011%2F03%2Fiptables-inbound-and-outbound-rules%2F&amp;send=false&amp;layout=button_count&amp;width=450&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:21px;" allowTransparency="true"></iframe></iframe>
+</div>
+
+<div style="width=95px">
+<a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+</div>
+
+</div>
+<p><img class="alignright size-medium wp-image-7354" title="Iptables" src="http://static.thegeekstuff.com/wp-content/uploads/2011/10/iptables-inbound-outbound-300x176.png" alt="" width="300" height="176" srcset="http://static.thegeekstuff.com/wp-content/uploads/2011/10/iptables-inbound-outbound-300x176.png 300w, http://www.thegeekstuff.com/wp-content/uploads/2011/10/iptables-inbound-outbound.png 400w" sizes="(max-width: 300px) 100vw, 300px" />In our previous IPTables firewall series article, we reviewed <a href="http://www.thegeekstuff.com/2011/02/iptables-add-rule/">how to add firewall rule</a> using &#8220;iptables -A&#8221;.</p>
+<p>We also explained how to allow incoming SSH connection. On a high-level, it involves following 3 steps.</p>
+<ol>
+<li>Delete all existing rules: &#8220;iptables -F&#8221;</li>
+<li>Allow only incoming SSH: &#8220;iptables -A INPUT -i eth0 -p tcp &#8211;dport 22 -j ACCEPT&#8221;</li>
+<li>Drop all other incoming packets: &#8220;iptables -A INPUT -j DROP&#8221;</li>
+</ol>
+<p>The above works. But it is not complete. One problem with the above steps is that it doesn&#8217;t restrict the outgoing packets.<br />
+<span id="more-7344"></span></p>
+<h2>Default Chain Policy</h2>
+<p>The default policy of a chain is ACCEPT. If you don&#8217;t what what a chain means, you better read our <a href="http://www.thegeekstuff.com/2011/01/iptables-fundamentals/">iptables introduction</a> article. So, both the INPUT and OUTPUT chain&#8217;s default policy is ACCEPT. In the above 3 steps we dropped all incoming packets at the end (except incoming ssh). However, we didn&#8217;t restrict the outgoing traffic.</p>
+<p>As you notice below, it says &#8220;(policy ACCEPT)&#8221; next to all the three chain names (INPUT, OUTPUT, and FORWARD). This indicates that the default chain policy is ACCEPT.</p>
+<pre># iptables -L
+Chain INPUT (policy ACCEPT)
+target     prot opt source               destination
+ACCEPT     tcp  --  anywhere             anywhere            tcp dpt:ssh
+DROP       all  --  anywhere             anywhere            
+
+Chain FORWARD (policy ACCEPT)
+target     prot opt source               destination         
+
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination</pre>
+<p>So, you have two options here.</p>
+<h3>Option 1: Add drop rules</h3>
+<p>At the end, add the following three drop rules that will drop all incoming, outgoing, and forward packets (except those that are defined above these three rules). If you do this, the default chain policy is still ACCEPT, which shouldn&#8217;t matter, as you are dropping all the packets at the end anyway.</p>
+    <center>
+      <div style="margin-left:2px; margin-top:10px; margin-bottom:10px; ">
+
+        <!-- AD BLOCK -->
+		
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- TGS Inside Content -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:250px"
+     data-ad-client="ca-pub-8090601437064582"
+     data-ad-slot="8643685131"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+        <!-- END AD BLOCK -->
+
+	  </div>
+    </center>
+
+
+<pre>iptables -A INPUT -j DROP
+iptables -A OUTPUT -j DROP
+iptables -A FORWARD -j DROP</pre>
+<h3>Option 2: Change the default chain policy to DROP</h3>
+<p>At the beginning, execute the following three commands that will change the chain&#8217;s default policy to DROP.</p>
+<pre>iptables -P INPUT DROP
+iptables -P OUTPUT DROP
+iptables -P FORWARD DROP</pre>
+<p>Now, if you add the allow ssh rule: &#8220;iptables -A INPUT -i eth0 -p tcp &#8211;dport 22 -j ACCEPT&#8221;, and do iptables -L, you&#8217;ll notice that it says &#8220;(policy DROP)&#8221; next to all the three chains.</p>
+<pre># iptables -L
+Chain INPUT (policy DROP)
+target     prot opt source               destination
+ACCEPT     tcp  --  anywhere             anywhere            tcp dpt:ssh
+DROP       all  --  anywhere             anywhere            
+
+Chain FORWARD (policy DROP)
+target     prot opt source               destination         
+
+Chain OUTPUT (policy DROP)
+target     prot opt source               destination</pre>
+<p>But there is a problem here. The allow ssh incoming connection rule will not work anymore, because all the outgoing packets are dropped.</p>
+<h2>Allow Incoming Connections</h2>
+<p>When the default policy is DROP for INPUT and OUTPUT chains, for every incoming firewall rule, you need to specify the following two rules.</p>
+<ol>
+<li>Request rule: This is the request that comes from the client to the server for the incoming connection.</li>
+<li>Response rule: This is for the response that goes out from the server to the client (for the corresponding incoming request).</li>
+</ol>
+<h3>Example 1: Allow incoming SSH connection</h3>
+<p>This is to allow SSH connection from outside to your server. i.e You can ssh to your server from outside.</p>
+<p>This involves two steps. First, we need to allow incoming new SSH connections. Once the incoming ssh connection is allowed, we also need to allow the response back for that incoming ssh connection.</p>
+<p>First, Allow incoming SSH connection request, as shown below.</p>
+<pre>iptables -A INPUT -i eth0 -p tcp --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT</pre>
+<p>In the above example:</p>
+<ul>
+<li>iptables -A INPUT: Append the new rule to the INPUT chain. For incoming connection request, this always has to be INPUT.</li>
+<li>-i eth0: This refers to the input interface. For incoming connections, this always has to be &#8216;-i&#8217;.</li>
+<li>-p tcp: Indicates that this is for TCP protocol.</li>
+<li>&#8211;dport 22: This refers to the destination port for the incoming connection. Port 22 is for ssh.</li>
+<li>-m state: This indicates that the &#8220;state&#8221; matching module is used. We&#8217;ll discuss more about &#8220;-m&#8221; option (and all available matching modules for iptables) in future article.</li>
+<li>&#8211;state NEW, ESTABLISHED: Options for the &#8220;state&#8221; matching module. In this example, only NEW and ESTABLISHED states are allowed. The 1st time when a SSH connection request is initiated from the client to the server, NEW state is used. ESTABLISHED state is used for all further request from the client to the server.</li>
+</ul>
+<p>Next, Allow outgoing (ESTABLISHED state only) SSH connection response (for the corresponding incoming SSH connection request).</p>
+<pre>iptables -A OUTPUT -o eth0 -p tcp --sport 22 -m state --state ESTABLISHED -j ACCEPT</pre>
+<p>In the above example:</p>
+<ul>
+<li>iptables -A OUTPUT: Append the new rule to the OUTPUT chain. Since this is for the response rule (for the corresponding incoming request) that goes out from the server, this should be OUTPUT.</li>
+<li>-o eth0: This refers the output interface. For outgoing connections, this always has to be &#8216;-o&#8217;.</li>
+<li>-p tcp: Indicates that this is for TCP protocol.</li>
+<li>&#8211;sport 22: This refers to the source port for the outgoing connection. Port 22 is for ssh. Since the incoming request (from the previous rule) came to the &#8220;destination&#8221; port, the outgoing response will go through the &#8220;source&#8221; port.</li>
+<li>-m state: This indicates that the &#8220;state&#8221; matching module is used.</li>
+<li>&#8211;state ESTABLISHED: Since this is a response rule, we allow only ESTABLISHED connection (and not any NEW connection).</li>
+</ul>
+<h3>Example 2: Allow incoming HTTP connection</h3>
+<p>This is to allow HTTP connection from outside to your server. i.e You can view your website running on the server from outside.</p>
+<p>Just like the above SSH incoming rules, this also involves two steps. First, we need to allow incoming new HTTP connection. Once the incoming HTTP connection is allowed, we need to allow the response back for that incoming HTTP connection.</p>
+<p>First, Allow incoming HTTP connection request, as shown below.</p>
+<pre>iptables -A INPUT -i eth0 -p tcp --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT</pre>
+<p>Next, Allow outgoing (ESTABLISHED only) HTTP connection response (for the corrresponding incoming SSH connection request).</p>
+<pre>iptables -A OUTPUT -o eth0 -p tcp --sport 80 -m state --state ESTABLISHED -j ACCEPT</pre>
+<p>Note: In the above HTTP request and response rule, everything is same as the SSH example except the port number.</p>
+<h2>Allow Outgoing Connections</h2>
+<p>When the default policy is DROP for the INPUT and OUTPUT chains, for every outgoing firewall rule, you need to specify the following two rules.</p>
+<ol>
+<li>Request rule: This is the request that goes out from the server to outside for the outgoing connection.</li>
+<li>Response rule: This is for the response that comes back from the outside to the server (for the corresponding outgoing request).</li>
+</ol>
+<h3>Example 3: Allow outgoing SSH connection</h3>
+<p>This is to allow SSH connection from your server to the outside. i.e You can ssh to outside server from your server.</p>
+<p>This involves two steps. First, we need to allow outgoing new SSH connection. Once the outgoing ssh connection is allowed, we also need to allow the response back for that outgoing ssh connection.</p>
+<p>First, Allow outgoing SSH connection request, as shown below.</p>
+<pre>iptables -A OUTPUT -o eth0 -p tcp --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT</pre>
+<p>In the above example:</p>
+<ul>
+<li>iptables -A OUTPUT: Append the new rule to the OUTPUT chain. For outgoing connection request, this always has to be OUTPUT.</li>
+<li>-o eth0: This refers the output interface. For outgoing connections, this always has to be &#8216;-o&#8217;.</li>
+<li>-p tcp: Indicates that this is for TCP protocol.</li>
+<li>&#8211;dport 22: This refers to the destination port for the outgoing connection.</li>
+<li>-m state: This indicates that &#8220;state&#8221; matching module is used.</li>
+<li>&#8211;state NEW, ESTABLISHED: Options for the &#8220;state&#8221; matching module. In this example, only NEW and ESTABLISHED states are allowed. The 1st time when a SSH connection request is initiated from the server to the outside, NEW state is used. ESTABLISHED state is used for all further request from the server to the outside.</li>
+</ul>
+<p>Next, Allow outgoing (ESTABLISHED only) SSH connection response (for the corresponding incoming SSH connection request).</p>
+<pre>iptables -A INPUT -i eth0 -p tcp --sport 22 -m state --state ESTABLISHED -j ACCEPT</pre>
+<p>In the above example:</p>
+<ul>
+<li>iptables -A INPUT: Append the new rule to the INPUT chain. Since this is for the response rule (for the corresponding outgoing request) that comes from the outside to the server, this should be INPUT.</li>
+<li>-i eth0: This refers the input interface. For incoming connections, this always has to be &#8216;-i&#8217;.</li>
+<li>-p tcp: Indicates that this is for TCP protocol.</li>
+<li>&#8211;sport 22: This refers to the source port for the incoming connection. Since the outgoing request (from the previous rule) went to the &#8220;destination&#8221; port, the incoming response will come from the &#8220;source&#8221; port.</li>
+<li>-m state: This indicates that the &#8220;state&#8221; matching module is used.</li>
+<li>&#8211;state ESTABLISHED: Since this is a response rule, we allow only ESTABLISHED connection (and not any NEW connection).</li>
+</ul>
+<h3>Putting it all together</h3>
+<p>Create rules.sh shell script which does the following:</p>
+<ol>
+<li>Delete all existing rules</li>
+<li>Set default chain policies</li>
+<li>Allow inbound SSH</li>
+<li>Allow inbound HTTP</li>
+<li>Allow outbound SSH</li>
+</ol>
+<p>First, create the rules.sh</p>
+<pre>$ vi rules.sh
+# 1. Delete all existing rules
+iptables -F
+
+# 2. Set default chain policies
+iptables -P INPUT DROP
+iptables -P FORWARD DROP
+iptables -P OUTPUT DROP
+
+# 3. Allow incoming SSH
+iptables -A INPUT -i eth0 -p tcp --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -o eth0 -p tcp --sport 22 -m state --state ESTABLISHED -j ACCEPT
+
+# 4. Allow incoming HTTP
+iptables -A INPUT -i eth0 -p tcp --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -o eth0 -p tcp --sport 80 -m state --state ESTABLISHED -j ACCEPT
+
+# 5. Allow outgoing SSH
+iptables -A OUTPUT -o eth0 -p tcp --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A INPUT -i eth0 -p tcp --sport 22 -m state --state ESTABLISHED -j ACCEPT</pre>
+<p>Next, execute the rules.sh and view the rules.</p>
+<pre># chmod u+x rules.sh
+
+# ./rules.sh
+
+# iptables -L
+Chain INPUT (policy DROP)
+target     prot opt source      destination
+ACCEPT     tcp  --  anywhere    anywhere      tcp dpt:ssh state NEW,ESTABLISHED
+ACCEPT     tcp  --  anywhere    anywhere      tcp dpt:http state NEW,ESTABLISHED
+ACCEPT     tcp  --  anywhere    anywhere      tcp spt:ssh state ESTABLISHED 
+
+Chain FORWARD (policy DROP)
+target     prot opt source      destination         
+
+Chain OUTPUT (policy DROP)
+target     prot opt source      destination
+ACCEPT     tcp  --  anywhere    anywhere      tcp spt:ssh state ESTABLISHED
+ACCEPT     tcp  --  anywhere    anywhere      tcp spt:http state ESTABLISHED
+ACCEPT     tcp  --  anywhere    anywhere      tcp dpt:ssh state NEW,ESTABLISHED</pre>
+<p>Using this as a basis you should be able to write your own incoming and outgoing iptables firewall rules. There is lot more to cover in IPTables. Stay tuned!</p>
+<p>Previous articles in the iptables series:</p>
+<ul>
+<li><a href="http://www.thegeekstuff.com/2011/01/iptables-fundamentals/">Linux Firewall Tutorial: IPTables Tables, Chains, Rules Fundamentals</a></li>
+<li><a href="http://www.thegeekstuff.com/2011/01/redhat-iptables-flush/">IPTables Flush: Delete / Remove All Rules On RedHat and CentOS Linux</a></li>
+<li><a href="http://www.thegeekstuff.com/2011/02/iptables-add-rule/">Linux IPTables: How to Add Firewall Rules (With Allow SSH Example)</a></li>
+</ul>
+<div style="margin:7px 0px 3px 0px; padding:5px; background:#F2F0E8">
+
+<div style="float:left; width=95px">
+<g:plusone size="medium"></g:plusone>
+</div>
+
+<div style="float:left; width=95px">
+<a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+</div>
+
+<div style="float:left; padding:2px; width:90px"><iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.thegeekstuff.com%2F2011%2F03%2Fiptables-inbound-and-outbound-rules%2F&amp;send=false&amp;layout=button_count&amp;width=450&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:21px;" allowTransparency="true"></iframe></iframe>
+</div>
+
+<div style="padding:1px">
+&gt;&nbsp;<a href="#commentform" rel="nofollow">Add your comment</a>
+</div>
+
+</div>
+<h3>If you enjoyed this article, you might also like..</h3>
+<table>
+<tr>
+<td valign="top">
+<ol>
+<li><a href="http://www.thegeekstuff.com/2010/12/50-unix-linux-sysadmin-tutorials/">50 Linux Sysadmin Tutorials</a></li>
+<li><a href="http://www.thegeekstuff.com/2010/11/50-linux-commands/">50 Most Frequently Used Linux Commands (With Examples)</a></li>
+<li><a href="http://www.thegeekstuff.com/2011/12/linux-performance-monitoring-tools/">Top 25 Best Linux Performance Monitoring and Debugging Tools</a></li>
+<li><a href="http://www.thegeekstuff.com/2009/03/15-practical-linux-find-command-examples/">Mommy, I found it! – 15 Practical Linux Find Command Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/linux-101-hacks-ebook/">Linux 101 Hacks 2nd Edition eBook</a>&nbsp;<img title="Linux 101 Hacks Book" src="http://static.thegeekstuff.com/images/free-small.png" alt="Linux 101 Hacks Book" /></li>
+</ol>
+</td>
+<td>
+<ul>
+<li><a href="http://www.thegeekstuff.com/2010/01/awk-introduction-tutorial-7-awk-print-examples/">Awk Introduction – 7 Awk Print Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2009/10/unix-sed-tutorial-advanced-sed-substitution-examples/">Advanced Sed Substitution Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2009/03/8-essential-vim-editor-navigation-fundamentals/">8 Essential Vim Editor Navigation Fundamentals</a></li>
+<li><a href="http://www.thegeekstuff.com/2011/06/iptables-rules-examples/">25 Most Frequently Used Linux IPTables Rules Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2008/08/turbocharge-putty-with-12-powerful-add-ons-software-for-geeks-3/">Turbocharge PuTTY with 12 Powerful Add-Ons</a></li>
+</ul>
+</td>
+</tr>
+</table>
+<br />
+<center>
+<table id="booktable">
+<tr>
+<td>
+<a rel="nofollow" href="http://www.thegeekstuff.com/bash-101-hacks-ebook/"><img title="Bash 101 Hacks Book" src="http://static.thegeekstuff.com/images/bash-132.png" alt="Bash 101 Hacks Book" /></a>
+</td>
+<td>
+<a rel="nofollow" href="http://www.thegeekstuff.com/sed-awk-101-hacks-ebook/"><img title="Sed and Awk 101 Hacks Book" src="http://static.thegeekstuff.com/images/sed-and-awk-132.png" alt="Sed and Awk 101 Hacks Book" /></a>
+</td>
+<td>
+<a rel="nofollow" href="http://www.thegeekstuff.com/nagios-core-ebook/"><img title="Nagios Core 3 Book" src="http://static.thegeekstuff.com/images/nagios-core-132.png" alt="Nagios Core 3 Book" /></a>
+</td>
+<td>
+<a rel="nofollow" href="http://www.thegeekstuff.com/vim-101-hacks-ebook/"><img title="Vim 101 Hacks Book" src="http://static.thegeekstuff.com/images/vim-101-hacks-132.png" alt="Vim 101 Hacks Book" /></a>
+</td>
+</tr>
+</table>
+</center>
+<br />
+				</div>
+				<p class="post_tags" itemprop="keywords">
+					<span class="post_tags_intro">Tagged as:</span>
+					<a href="http://www.thegeekstuff.com/tag/iptables-inbound-rule/" rel="tag">IPTables Inbound Rule</a>,
+					<a href="http://www.thegeekstuff.com/tag/iptables-outbound-rule/" rel="tag">IPTables Outbound Rule</a>,
+					<a href="http://www.thegeekstuff.com/tag/iptables-outbound-traffic/" rel="tag">IPTables Outbound Traffic</a>
+				</p>
+			</div>
+			<div id="comments">
+				<p class="comments_intro"><span class="bracket">{</span> <span class="num_comments">13</span> comments&#8230; <a href="#commentform" rel="nofollow">add one</a> <span class="bracket">}</span></p>
+				<ul class="comment_list">
+					<li class="comment even thread-even depth-1" id="comment-92446">
+						<div class="comment_head">
+							<span class="avatar"></span>
+							<span class="comment_author">al_mic</span>
+							<span class="comment_date">March 15, 2011, 2:42 am</span>
+						</div>
+						<div class="comment_text grt" id="comment-body-92446"><p>Hi,</p>
+<p>Do you think it could be of better use to only allow syn to port 80 and then allow just &#8211;state ESTABLISHED,RELATED ?</p>
+<p>Or &#8211;state NEW,ESTABLISHED makes no difference ?</p>
+<p>Thanks.</p>
+						</div>
+						<div class="comment_footer">
+							<a class="comment_permalink" href="#comment-92446" title="permalink to this comment" rel="nofollow">Link</a>
+						</div>
+</li><!-- #comment-## -->
+					<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-93290">
+						<div class="comment_head">
+							<span class="avatar"></span>
+							<span class="comment_author">ali</span>
+							<span class="comment_date">March 19, 2011, 4:52 am</span>
+						</div>
+						<div class="comment_text grt" id="comment-body-93290"><p>thanks allllllllllllllllllllot man im realy waiting for the next iptables tutorial</p>
+						</div>
+						<div class="comment_footer">
+							<a class="comment_permalink" href="#comment-93290" title="permalink to this comment" rel="nofollow">Link</a>
+						</div>
+</li><!-- #comment-## -->
+					<li class="comment even thread-even depth-1" id="comment-134021">
+						<div class="comment_head">
+							<span class="avatar"></span>
+							<span class="comment_author">jalal hajigholamali</span>
+							<span class="comment_date">October 21, 2011, 11:03 am</span>
+						</div>
+						<div class="comment_text grt" id="comment-body-134021"><p>Hi,<br />
+Thanks, very useful article</p>
+						</div>
+						<div class="comment_footer">
+							<a class="comment_permalink" href="#comment-134021" title="permalink to this comment" rel="nofollow">Link</a>
+						</div>
+</li><!-- #comment-## -->
+					<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-158156">
+						<div class="comment_head">
+							<span class="avatar"></span>
+							<span class="comment_author">mgode</span>
+							<span class="comment_date">December 19, 2011, 7:02 am</span>
+						</div>
+						<div class="comment_text grt" id="comment-body-158156"><p>this article has resolved my problem concerning with iptables in a large extent,thanks a lot!!</p>
+						</div>
+						<div class="comment_footer">
+							<a class="comment_permalink" href="#comment-158156" title="permalink to this comment" rel="nofollow">Link</a>
+						</div>
+</li><!-- #comment-## -->
+					<li class="comment even thread-even depth-1" id="comment-218362">
+						<div class="comment_head">
+							<span class="avatar"></span>
+							<span class="comment_author">Md. Nazmul Hasan</span>
+							<span class="comment_date">April 6, 2012, 2:55 am</span>
+						</div>
+						<div class="comment_text grt" id="comment-body-218362"><p>Thanks</p>
+						</div>
+						<div class="comment_footer">
+							<a class="comment_permalink" href="#comment-218362" title="permalink to this comment" rel="nofollow">Link</a>
+						</div>
+</li><!-- #comment-## -->
+					<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-221245">
+						<div class="comment_head">
+							<span class="avatar"><a href="http://www.doxer.org" rel="nofollow"></a></span>
+							<span class="comment_author"><a href='http://www.doxer.org' rel='external nofollow' class='url'>doxer</a></span>
+							<span class="comment_date">April 12, 2012, 5:54 am</span>
+						</div>
+						<div class="comment_text grt" id="comment-body-221245"><p>Thanks very much! this did help me a lot!</p>
+						</div>
+						<div class="comment_footer">
+							<a class="comment_permalink" href="#comment-221245" title="permalink to this comment" rel="nofollow">Link</a>
+						</div>
+</li><!-- #comment-## -->
+					<li class="comment even thread-even depth-1" id="comment-280244">
+						<div class="comment_head">
+							<span class="avatar"></span>
+							<span class="comment_author">gurpreet</span>
+							<span class="comment_date">August 2, 2012, 11:41 pm</span>
+						</div>
+						<div class="comment_text grt" id="comment-body-280244"><p>i have a problem in ssh</p>
+<p>i am using squid proxy server. and my client use ubuntu linux. client use ssh to connect to USA pc. but linux firewall can&#8217;t access to allow the ssh to remote server how to solve.</p>
+<p>i have server with two lan card</p>
+<p>1 lan public ip<br />
+2 lan private ip- which is use client</p>
+<p>how to solve this problem</p>
+<p>thanks in advance</p>
+						</div>
+						<div class="comment_footer">
+							<a class="comment_permalink" href="#comment-280244" title="permalink to this comment" rel="nofollow">Link</a>
+						</div>
+</li><!-- #comment-## -->
+					<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-344240">
+						<div class="comment_head">
+							<span class="avatar"></span>
+							<span class="comment_author">Bhanu</span>
+							<span class="comment_date">October 19, 2012, 3:23 am</span>
+						</div>
+						<div class="comment_text grt" id="comment-body-344240"><p>Hi Ramesh ,</p>
+<p>I have a issue with squid and on same server iptables are running .<br />
+The scenario of my state is , I have a external  firewall in which my squid ip is in NAT ed as (1.2.3.4). when I want to allow a server (5.6.7.8) to communicate to port 3128 it has to pass through NTAED ip (1.2.3.4)   after that when tcp packest come to squid serevr (9.0.0.1)  I am able to see source ip  (5.6.7.8)  , I have enabled on squid file to access my 3128 port. but  I want add a rule on iptables for this connection .<br />
+Please help .</p>
+<p>Cheers,<br />
+Bhanu Prakash .K</p>
+						</div>
+						<div class="comment_footer">
+							<a class="comment_permalink" href="#comment-344240" title="permalink to this comment" rel="nofollow">Link</a>
+						</div>
+</li><!-- #comment-## -->
+					<li class="comment even thread-even depth-1" id="comment-649992">
+						<div class="comment_head">
+							<span class="avatar"><a href="http://www.58bits.com" rel="nofollow"></a></span>
+							<span class="comment_author"><a href='http://www.58bits.com' rel='external nofollow' class='url'>Anthony Bouch</a></span>
+							<span class="comment_date">April 11, 2013, 4:25 am</span>
+						</div>
+						<div class="comment_text grt" id="comment-body-649992"><p>Excellent tutorial. Thanks.</p>
+						</div>
+						<div class="comment_footer">
+							<a class="comment_permalink" href="#comment-649992" title="permalink to this comment" rel="nofollow">Link</a>
+						</div>
+</li><!-- #comment-## -->
+					<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-1048254">
+						<div class="comment_head">
+							<span class="avatar"></span>
+							<span class="comment_author">Darsh</span>
+							<span class="comment_date">November 20, 2013, 11:03 am</span>
+						</div>
+						<div class="comment_text grt" id="comment-body-1048254"><p>Hey,</p>
+<p>As per the script, first command is &#8220;iptables -F&#8221; and second command is &#8220;iptables -P INPUT DROP&#8221;</p>
+<p>After executing 2 commands(if via ssh), we cannot execute any more commands since all the incoming requests are blocked.. right?</p>
+<p>Can you check again??</p>
+						</div>
+						<div class="comment_footer">
+							<a class="comment_permalink" href="#comment-1048254" title="permalink to this comment" rel="nofollow">Link</a>
+						</div>
+</li><!-- #comment-## -->
+					<li class="comment even thread-even depth-1" id="comment-1058320">
+						<div class="comment_head">
+							<span class="avatar"><a href="http://amieltech.com" rel="nofollow"></a></span>
+							<span class="comment_author"><a href='http://amieltech.com' rel='external nofollow' class='url'>samuel</a></span>
+							<span class="comment_date">November 25, 2013, 6:05 am</span>
+						</div>
+						<div class="comment_text grt" id="comment-body-1058320"><p>&#8230; there is no drop in the in input chain. There is no allow in the output chain.<br />
+the comment (drop) in each chain pretty much says it all.</p>
+<p>&#8230; so what if you attempt a connection on other than the included ports; that had not already been established&#8230;try it.</p>
+						</div>
+						<div class="comment_footer">
+							<a class="comment_permalink" href="#comment-1058320" title="permalink to this comment" rel="nofollow">Link</a>
+						</div>
+</li><!-- #comment-## -->
+					<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-1132450">
+						<div class="comment_head">
+							<span class="avatar"></span>
+							<span class="comment_author">dhananjay harel</span>
+							<span class="comment_date">December 21, 2013, 2:24 am</span>
+						</div>
+						<div class="comment_text grt" id="comment-body-1132450"><p>Hi,<br />
+It doesn&#8217;t work in my case &#8230;<br />
+I want to do the simple thing.<br />
+1&gt;Block all outgoing http traffic from my web server machine except some hostnames OR IP address specified .<br />
+2&gt;Allow outgoing port 80 traffic to that hostnames but block for all other hosts<br />
+to which my web-server machine will make the request&#8230;.</p>
+<p>I tried this script but blocks the site&#8230;.<br />
+ie its blocking all incoming http traffic</p>
+						</div>
+						<div class="comment_footer">
+							<a class="comment_permalink" href="#comment-1132450" title="permalink to this comment" rel="nofollow">Link</a>
+						</div>
+</li><!-- #comment-## -->
+					<li class="comment even thread-even depth-1" id="comment-1247932">
+						<div class="comment_head">
+							<span class="avatar"></span>
+							<span class="comment_author">john</span>
+							<span class="comment_date">February 3, 2014, 3:31 am</span>
+						</div>
+						<div class="comment_text grt" id="comment-body-1247932"><p>First of all Thank you for this nice and easily understandable docunemt.</p>
+<p>But i can not make it work for DNS port 53.</p>
+<p>any help<br />
+john</p>
+						</div>
+						<div class="comment_footer">
+							<a class="comment_permalink" href="#comment-1247932" title="permalink to this comment" rel="nofollow">Link</a>
+						</div>
+</li><!-- #comment-## -->
+				</ul>
+				<form id="commentform" method="post" action="http://www.thegeekstuff.com/wp-comments-post.php">
+					<a rel="nofollow" id="cancel-comment-reply-link" href="/2011/03/iptables-inbound-and-outbound-rules/#respond" style="display:none;">Cancel reply</a>
+					<p class="comment_form_title">Leave a Comment</p>
+					<p id="comment_form_name">
+						<label for="author">Name</label>
+						<input type="text" id="author" class="input_text" name="author" value="" tabindex="1" />
+					</p>
+					<p id="comment_form_email">
+						<label for="email">Email</label>
+						<input type="text" id="email" class="input_text" name="email" value="" tabindex="2" />
+					</p>
+					<p id="comment_form_url">
+						<label for="url">Website</label>
+						<input type="text" id="url" class="input_text" name="url" value="" tabindex="3" />
+					</p>
+					<p id="comment_form_comment">
+						<label for="comment">Comment</label>
+						<textarea name="comment" id="comment" class="input_text" tabindex="4" rows="6"></textarea>
+					</p>
+					<p id="comment_form_submit">
+						<input type="submit" id="submit" class="input_submit" name="submit" tabindex="5" value="Submit" />
+					</p>
+<p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="caaa330c89" /></p>
+
+	<p style="clear: both;" class="subscribe-to-comments">
+	<input type="checkbox" name="subscribe" id="subscribe" value="subscribe" style="width: auto;" />
+	<label for="subscribe">Notify me of followup comments via e-mail</label>
+	</p>
+
+
+<p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="98"/></p><input type='hidden' name='comment_post_ID' value='7344' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+				</form>
+			</div>
+			<div class="prev_next">
+				<p class="next_post">Next post: <a href="http://www.thegeekstuff.com/2011/03/apache-hardening/" rel="next">10 Tips to Secure Your Apache Web Server on UNIX / Linux</a></p>
+				<p class="previous_post">Previous post: <a href="http://www.thegeekstuff.com/2011/03/linux-performance-monitoring-intro/" rel="prev">Linux Performance Monitoring and Tuning Introduction</a></p>
+			</div>
+		</div>
+		<div class="sidebar">
+<div class="widget widget_text" id="text-21">			<div class="textwidget"><a title="Subscribe via RSS" href="http://www.thegeekstuff.com/feed" rel="nofollow">RSS</a>&nbsp; | &nbsp;<a title="Subscribe via Email" href="http://feedburner.google.com/fb/a/mailverify?uri=TheGeekStuff&loc=en_US" rel="nofollow">Email</a>&nbsp; | &nbsp;<a title="Follow us on Twitter" href="http://twitter.com/thegeekstuff" rel="nofollow">Twitter</a>&nbsp; | &nbsp;<a title="Become a fan" href="http://www.facebook.com/thegeekstuff" rel="nofollow">Facebook</a>&nbsp; | &nbsp;<a title="Follow us on Google+" href="https://plus.google.com/112493711428194838421/posts">Google+</a>
+<br /><br />
+<form action="http://www.thegeekstuff.com/search" id="cse-search-box">
+  <div>
+    <input type="hidden" name="cx" value="005666763606120661560:zkmegbt_djm" />
+    <input type="hidden" name="cof" value="FORID:10" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input style="background-color:#fffeee" type="text" name="q" size="30" />
+    <input style="border-color:#CCCCCC #999999 #999999 #CCCCCC; border-style:double; border-width:1px; overflow:visible;" type="submit" name="sa" value="Search" />
+  </div>
+</form>
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript">google.load("elements", "1", {packages: "transliteration"});</script>
+<script type="text/javascript" src="http://www.google.com/coop/cse/t13n?form=cse-search-box&t13n_langs=en"></script>
+<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&lang=en"></script>
+<br /></div>
+		</div><div class="widget widget_text" id="text-3">			<div class="textwidget"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- TGS Side Bar -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:250px"
+     data-ad-client="ca-pub-8090601437064582"
+     data-ad-slot="9054077260"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<br/></div>
+		</div><div class="widget widget_text" id="text-4"><p class="widget_title">EBOOKS</p>			<div class="textwidget"><ul>
+<li><img title="Linux 101 Hacks Book" src="http://static.thegeekstuff.com/images/free-small.png" alt="Linux 101 Hacks Book" />&nbsp;<a href="http://www.thegeekstuff.com/linux-101-hacks-ebook/">Linux 101 Hacks 2nd Edition eBook</a> - Practical Examples to Build a Strong Foundation in Linux</li>
+<li><a href="http://www.thegeekstuff.com/bash-101-hacks-ebook/">Bash 101 Hacks eBook</a> - Take Control of Your Bash Command Line and Shell Scripting</li>
+<li><a href="http://www.thegeekstuff.com/sed-awk-101-hacks-ebook/">Sed and Awk 101 Hacks eBook</a> - Enhance Your UNIX / Linux Life with Sed and Awk</li>
+<li><a href="http://www.thegeekstuff.com/vim-101-hacks-ebook/">Vim 101 Hacks eBook</a> - Practical Examples for Becoming Fast and Productive in Vim Editor</li>
+<li><a href="http://www.thegeekstuff.com/nagios-core-ebook/">Nagios Core 3 eBook</a> - Monitor Everything, Be Proactive, and Sleep Well</li>
+</ul></div>
+		</div><div class="widget widget_text" id="text-22">			<div class="textwidget"><iframe src="//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fthegeekstuff&amp;width&amp;height=258&amp;colorscheme=light&amp;show_faces=true&amp;header=false&amp;stream=false&amp;show_border=true" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:258px;" allowTransparency="true"></iframe></div>
+		</div><div class="widget widget_text" id="text-17"><p class="widget_title">POPULAR POSTS</p>			<div class="textwidget"><ul>
+<li><a href="http://www.thegeekstuff.com/2009/01/12-amazing-and-essential-linux-books-to-enrich-your-brain-and-library/">12 Amazing and Essential Linux Books To Enrich Your Brain and Library</a></li>
+<li><a href="http://www.thegeekstuff.com/2010/12/50-unix-linux-sysadmin-tutorials/">50 UNIX / Linux Sysadmin Tutorials</a></li>
+<li><a href="http://www.thegeekstuff.com/2010/11/50-linux-commands/">50 Most Frequently Used UNIX / Linux Commands (With Examples)</a></li>
+<li><a href="http://www.thegeekstuff.com/2010/08/gtd-getting-things-done/">How To Be Productive and Get Things Done Using GTD</a></li>
+<li><a href="http://www.thegeekstuff.com/2010/03/30-things-to-do-when-you-are-bored-and-have-a-computer/">30 Things To Do When you are Bored and have a Computer</a></li>
+<li><a href="http://www.thegeekstuff.com/2010/09/linux-file-system-structure/">Linux Directory Structure (File System Structure) Explained with Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2009/06/15-practical-crontab-examples/">Linux Crontab: 15 Awesome Cron Job Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2009/03/15-practical-unix-grep-command-examples/">Get a Grip on the Grep! – 15 Practical Grep Command Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2009/07/linux-ls-command-examples/">Unix LS Command: 15 Practical Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2008/08/15-examples-to-master-linux-command-line-history/">15 Examples To Master Linux Command Line History</a></li>
+<li><a href="http://www.thegeekstuff.com/2010/08/bug-tracking-system/">Top 10 Open Source Bug Tracking System</a></li>
+<li><a href="http://www.thegeekstuff.com/2009/01/vi-and-vim-macro-tutorial-how-to-record-and-play/">Vi and Vim Macro Tutorial: How To Record and Play</a></li>
+<li><a href="http://www.thegeekstuff.com/2009/03/15-practical-linux-find-command-examples/">Mommy, I found it! -- 15 Practical Linux Find Command Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2009/07/best-gmail-tips-and-tricks/">15 Awesome Gmail Tips and Tricks</a></li>
+<li><a href="http://www.thegeekstuff.com/2009/06/expertise-in-google-search/">15 Awesome Google Search Tips and Tricks</a></li>
+<li><a href="http://www.thegeekstuff.com/2010/08/raid-levels-tutorial/">RAID 0, RAID 1, RAID 5, RAID 10 Explained with Diagrams</a></li>
+<li><a href="http://www.thegeekstuff.com/2010/01/15-practical-unix-linux-top-command-examples/">Can You Top This? 15 Practical Linux Top Command Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2009/09/top-5-best-network-monitoring-tools/">Top 5 Best System Monitoring Tools</a></li>
+<li><a href="http://www.thegeekstuff.com/2009/06/top-5-best-linux-os-distributions/">Top 5 Best Linux OS Distributions</a></li>
+<li><a href="http://www.thegeekstuff.com/2008/06/how-to-monitor-remote-linux-host-using-nagios-30/">How To Monitor Remote Linux Host using Nagios 3.0</a></li>
+<li><a href="http://www.thegeekstuff.com/2010/01/awk-introduction-tutorial-7-awk-print-examples/">Awk Introduction Tutorial – 7 Awk Print Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2010/09/rsync-command-examples/">How to Backup Linux? 15 rsync Command Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2009/09/the-ultimate-wget-download-guide-with-15-awesome-examples/">The Ultimate Wget Download Guide With 15 Awesome Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2009/07/top-5-best-linux-text-editors/">Top 5 Best Linux Text Editors</a></li>
+<li><a href="http://www.thegeekstuff.com/2010/08/tcpdump-command-examples/">Packet Analyzer: 15 TCPDUMP Command Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2010/06/bash-array-tutorial/">The Ultimate Bash Array Tutorial with 15 Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2008/11/3-steps-to-perform-ssh-login-without-password-using-ssh-keygen-ssh-copy-id/">3 Steps to Perform SSH Login Without Password Using ssh-keygen & ssh-copy-id</a></li>
+<li><a href="http://www.thegeekstuff.com/2009/10/unix-sed-tutorial-advanced-sed-substitution-examples/">Unix Sed Tutorial: Advanced Sed Substitution Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2010/03/netstat-command-examples/">UNIX / Linux: 10 Netstat Command Examples</a></li>
+<li><a href="http://www.thegeekstuff.com/2008/06/the-ultimate-guide-for-creating-strong-passwords/">The Ultimate Guide for Creating Strong Passwords</a></li>
+<li><a href="http://www.thegeekstuff.com/2008/08/6-steps-to-secure-your-home-wireless-network/">6 Steps to Secure Your Home Wireless Network</a></li>
+<li><a href="http://www.thegeekstuff.com/2008/08/turbocharge-putty-with-12-powerful-add-ons-software-for-geeks-3/">Turbocharge PuTTY with 12 Powerful Add-Ons</a></li>
+</ul></div>
+		</div><div class="widget widget_text" id="text-19"><p class="widget_title">CATEGORIES</p>			<div class="textwidget"><ul>
+<li><a rel="nofollow" href="/category/linux/">Linux Tutorials</a></li>
+<li><a rel="nofollow" href="/category/vim-2/">Vim Editor</a></li>
+<li><a rel="nofollow" href="/category/sed/">Sed Scripting</a></li>
+<li><a rel="nofollow" href="/category/awk/">Awk Scripting</a></li>
+<li><a rel="nofollow" href="/category/bash-2/">Bash Shell Scripting</a></li>
+<li><a rel="nofollow" href="/category/nagios-2/">Nagios Monitoring</a></li>
+<li><a rel="nofollow" href="/category/openssh-2/">OpenSSH</a></li>
+<li><a rel="nofollow" href="/category/iptables/">IPTables Firewall</a></li>
+<li><a rel="nofollow" href="/category/apache/">Apache Web Server</a></li>
+<li><a rel="nofollow" href="/category/mysql/">MySQL Database</a></li>
+<li><a rel="nofollow" href="/category/perl/">Perl Programming</a></li>
+<li><a rel="nofollow" href="/category/google/">Google Tutorials</a></li>
+<li><a rel="nofollow" href="/category/ubuntu/">Ubuntu Tutorials</a></li>
+<li><a rel="nofollow" href="/category/postgresql/">PostgreSQL DB</a></li>
+<li><a rel="nofollow" href="/category/hello-world/">Hello World Examples</a></li>
+<li><a rel="nofollow" href="/category/c-programming/">C Programming</a></li>
+<li><a rel="nofollow" href="/category/c-plus-plus/">C++ Programming</a></li>
+<li><a rel="nofollow" href="/category/dell-2/">DELL Server Tutorials</a></li>
+<li><a rel="nofollow" href="/category/oracle/">Oracle Database</a></li>
+<li><a rel="nofollow" href="/category/vmware/">VMware Tutorials</a></li>
+</ul></div>
+		</div><div class="widget widget_text" id="text-20">			<div class="textwidget"><g:person href="https://plus.google.com/112493711428194838421" data-rel="author" layout="landscape"></g:person></div>
+		</div>		</div>
+	</div>
+	<div class="footer">
+<div id="footer_widgets" class="columns_3">
+	<div class="one-third sidebar first">
+<div class="widget widget_text" id="text-7"><h4 class="widget_title">About The Geek Stuff</h4>			<div class="textwidget"><br />
+<img class="float" title="Ramesh Natarajan" src="http://static.thegeekstuff.com/images/ramesh-small.gif" alt="Linux 101 Hacks Book" />
+My name is <strong>Ramesh Natarajan</strong>. I will be posting instruction guides, how-to, troubleshooting tips and tricks on Linux, database, hardware, security and web. My focus is to write articles that will either teach you or help you resolve a problem. Read more about <a href="http://www.thegeekstuff.com/about/">Ramesh Natarajan</a> and the blog.</div>
+		</div>	</div>
+	<div class="one-third sidebar">
+<div class="widget widget_text" id="text-9"><h4 class="widget_title">Contact Us</h4>			<div class="textwidget"><br />
+<strong>Email Me :</strong>
+Use this <a href="http://www.thegeekstuff.com/contact" rel="nofollow">Contact Form</a> to get in touch me with your comments, questions or suggestions about this site. You can also simply drop me a line to say hello!.
+<br /><br />
+<a title="Follow us on Google+" href="https://plus.google.com/112493711428194838421/posts">Follow us on Google+</a>
+<br /><br />
+<a title="Follow us on Twitter" href="http://twitter.com/thegeekstuff" rel="nofollow">Follow us on Twitter</a>
+<br /><br />
+<a href="
+http://www.facebook.com/thegeekstuff" rel="nofollow">Become a fan on Facebook</a>&nbsp;&nbsp;</div>
+		</div>	</div>
+	<div class="one-third sidebar last">
+<div class="widget widget_text" id="text-8"><h4 class="widget_title">Support Us</h4>			<div class="textwidget"><br />
+Support this blog by purchasing one of my ebooks.
+<br /><br />
+<a rel="nofollow" href="http://www.thegeekstuff.com/bash-101-hacks-ebook/">Bash 101 Hacks eBook</a>
+<br /><br />
+<a rel="nofollow" href="http://www.thegeekstuff.com/sed-awk-101-hacks-ebook/">Sed and Awk 101 Hacks eBook</a>
+<br /><br />
+<a rel="nofollow" href="http://www.thegeekstuff.com/vim-101-hacks-ebook/">Vim 101 Hacks eBook</a>
+<br /><br />
+<a rel="nofollow" href="http://www.thegeekstuff.com/nagios-core-ebook/">Nagios Core 3 eBook</a></div>
+		</div>	</div>
+	<div style="clear:both;"></div>
+</div>
+		<p class="attribution">Copyright &copy; 2008&ndash;2015 Ramesh Natarajan. All rights reserved  | <a href="http://www.thegeekstuff.com/copyright">Terms of Service</a></p>
+	</div>
+</div>
+<script type='text/javascript' src='http://static.thegeekstuff.com/wp-content/plugins/akismet/_inc/form.js.gzip?ver=3.1.5'></script>
+<script type='text/javascript' src='http://static.thegeekstuff.com/wp-includes/js/comment-reply.min.js.gzip?ver=4.4.2'></script>
+<script type='text/javascript' src='http://static.thegeekstuff.com/wp-includes/js/wp-embed.min.js.gzip?ver=4.4.2'></script>
+<script type="text/javascript">
+(function(){
+	var classes = document.getElementsByClassName('menu_control');
+	for (i = 0; i < classes.length; i++) {
+		classes[i].onclick = function() {
+			var menu = this.nextElementSibling;
+			if (/show_menu/.test(menu.className))
+				menu.className = menu.className.replace('show_menu', '').trim();
+			else
+				menu.className += ' show_menu';
+		};
+	}
+})();
+</script>
+<noscript><style type="text/css" scoped>.menu { display: block; }</style></noscript>
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+
+</body>
+</html>
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using disk: enhanced
+Content Delivery Network via Amazon Web Services: CloudFront: static.thegeekstuff.com
+
+ Served from: www.thegeekstuff.com @ 2016-04-13 08:15:30 by W3 Total Cache -->
