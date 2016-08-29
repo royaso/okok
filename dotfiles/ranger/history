@@ -1,0 +1,50 @@
+rename coding-yinhuiyao.jpg
+search bak
+search media
+search shot
+rename 小时代至少8分!.jpg
+rename 我一直在怀疑，毕业究竟是什么。原来就是从学校=整个社会这个错觉当中毕业.jpg
+rename 夏一可竞技场六大选卡原则.jpg
+rename 夏一可竞技场各职业胜率排行.jpg
+filter shot
+
+shell mkdir shotjpg3
+filter 
+search hi
+search 
+rename hearthstone-wine-setting.png
+search hear
+search exe
+shell k
+search desk
+search the
+rename asd.gif
+rename asdf.gif
+rename gscan2pdf.pdf
+rename 
+bulkrename 
+open_with 
+search i3
+X
+search xx
+delete 
+rename 我们一路奋战不是为了改变世界而是为了不让世界改变我们.jpg
+rename 世界上只有两种悲剧，一种是得不到想要的，另一种是得到了.jpg
+rename 至少伤疤是永恒的.jpg
+rename 我的眼里只有你.jpg
+search vi
+search a.jpg
+rename asdf
+rename asdf.jpg
+rename a.jpg
+cd /home/roya/git/
+rename roya.java.png
+cd ~/git/work
+search lhc
+search vps
+search iptable
+open_with vim
+rename iptables.html.gz
+search pdf
+shell -w unrar e %f
+delete
